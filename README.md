@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+# Create a React component called HighScoreApp
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. a button, which adjusts the users score by a number between -100 and 100 when clicked
+2. display of the current score
+3. an input field, labeled 'Name', where the user can type their name
+4. a submit button that will make a POST request (to dummy endpoint here) to save their score, name, and number of times they clicked to reach that score
 
-## Available Scripts
+**Caveat: the user can only click a maximum of 10 times before submitting their score; once they submit their score, the click counter gets reset to 0, and the name input field is cleared.
 
-In the project directory, you can run:
+# Take-home exercise
 
-### `npm start`
+First, set up a React app in a github repo that you can share with Cobalt engineering, and move your starter code from the in-person exercise there.
+Then, complete any part of the previous exercise that didn’t get finished during the in-person interview. Please commit these changes so we can review the first milestone.
+Pay special attention to user-friendliness by providing error feedback and making it easy to use the app. E. g. if a score can't be submitted, let the user know why
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Continue with additional requirements
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. Style the page; for inspiration you can visit: cobalt.io and designsystem.cobalt.io. 
+2. Add messaging to let the user know how many clicks they have left, and if they have reached the maximum number of 10 clicks.
+3. Add a dummied data fetch, assuming that the API service will send you the proper data as an array of objects.  The results will NOT be sorted, and can contain from 0+ records.
+Example:
+[{name: "Jane Doe", totalPoints: 157, clicks: 5},
+{name: "Lily Allen", totalPoints: 234, clicks: 8},
+{name: "John Smith", totalPoints: 390, clicks: 10}]
+4.  Display a leaderboard table of the top 10 total points scores, showing:: name, score, number of clicks, average points per click.
+5. Create a real-time update of the table, so that if the person playing achieves a score that puts them in the leaderboard, show their position in the table.  However, the data should be validated - so that if the inputs are empty the submit button cannot be clicked, and if the name already appears in the list, it is updated rather than duplicated. (they still need to click `Send it!` button to save their score), and adjust other positions accordingly (knocking the lowest score out of the display)
+6. Write a couple tests, and note why you chose to cover these particular areas of code. 
 
-### `npm test`
+# Option: Developer's choice 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+If you like - rather than limit the number of clicks to 10 and prevent additional button clicks, reset the points counter to 0 on every 10th click of the button. Provide a brief explanation in comments what are the pros and cons of each restriction, in terms of usability and user experience.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Bonus
+- Give the user the option to toggle the table display between the top 10 total points, or the top 10 avg points per click. Add whatever UI elements/messaging are necessary to accomplish this.
+- Make the style responsive to various page widths
+- What API parameters would you request be made available, to optimize data processing on the front end?  Assume those parameters are made available to you, and incorporate them into your code. 

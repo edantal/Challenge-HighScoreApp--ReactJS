@@ -1,23 +1,38 @@
-import logo from './logo.svg';
+import React, { useState, useCallback } from 'react';
 import './App.css';
+import Form from './components/Form';
+import Success from './components/Success';
 
 function App() {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [vals, setOnSuccess] = useState({
+    name: '',
+    clicks: 0,
+    score: 0,
+  });
+  
+  const submitForm = useCallback((vals) => {
+    setOnSuccess({
+      ...vals,
+      name: vals.name,
+      clicks: vals.clicks,
+      score: vals.score
+    });
+    // console.log(vals);
+    setIsSubmitted(true);
+  }, [setIsSubmitted]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>High Score App</h1>
+      <div className="container">
+        {!isSubmitted ? (
+          <Form submitForm={submitForm} />
+        ) : (
+          <Success vals={vals} />
+        )}
+
+      </div>
     </div>
   );
 }
