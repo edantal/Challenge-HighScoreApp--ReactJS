@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import './App.css';
+import './styles/App.scss';
 import Form from './components/Form';
 import Success from './components/Success';
 

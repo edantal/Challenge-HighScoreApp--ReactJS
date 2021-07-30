@@ -1,0 +1,36 @@
+.form-input {
+  margin: 1.6rem 0;
+}
+
+.err {
+  font-size: 1rem;
+  color: $red;
+}
+
+input[type="text"] {
+  padding: 1rem;
+  background-color: $greyE;
+  border: 1px solid $greyE;
+  border-radius: 3px;
+  outline: none;
+  font-family: inherit;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  color: inherit;
+}
+
+button[type="submit"] {
+  padding: 1rem;
+  @include gradient($blue, to right bottom, $blue, $purple);
+  border-radius: 3px;
+  outline: 0;
+  border: 0;
+  font-weight: 600;
+  color: $clrWhite;
+  text-align: center;
+  transition: all .6s ease-out;
+
+  &:hover {
+    background: $blue;
+  }
+}

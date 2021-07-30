@@ -1,0 +1,30 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  @include gradient($blue, to right bottom, $blue, $purple);
+  text-align: center;
+}
+
+.container {
+  min-width: 30rem;
+  padding: 4rem 5rem;
+  background-color: $clrWhite;
+  border-radius: 3px;
+  box-shadow: 0 3px 2px 5px rgba($clrBlack,.05);
+}

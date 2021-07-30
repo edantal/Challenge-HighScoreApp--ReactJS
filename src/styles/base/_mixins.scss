@@ -1,0 +1,15 @@
+/* ---- MEDIA QUERIES -------------------------------------------------------- */
+@mixin mQuery($breakpoint) {
+  @if $breakpoint == MD { 
+    @media only screen and (max-width: $md) { @content };
+  }
+  @if $breakpoint == SM {
+    @media only screen and (max-width: $sm) { @content };
+  }
+}
+
+/* ---- GRADIENT ------------------------------------------------------------- */
+@mixin gradient($solid, $dir, $color1, $color2) {
+  background: $solid;
+  background: linear-gradient($dir, $color1, $color2);
+}
