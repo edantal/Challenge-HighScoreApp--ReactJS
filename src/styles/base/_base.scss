@@ -14,17 +14,22 @@ body {
 .App {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   height: 100vh;
+  padding: 1.5rem;
   @include gradient($blue, to right bottom, $blue, $purple);
   text-align: center;
 }
 
 .container {
-  min-width: 30rem;
-  padding: 4rem 5rem;
+  position: relative;
+  min-width: 40rem;
   background-color: $clrWhite;
   border-radius: 3px;
-  box-shadow: 0 3px 2px 5px rgba($clrBlack,.05);
+  box-shadow: 0 3px 2px 3px rgba($clrBlack,.03);
+
+  @include mQuery(SM) {
+    width: 90vw;
+    min-width: unset;
+  }
 }

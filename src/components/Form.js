@@ -14,7 +14,7 @@ export default function Form({ submitForm }) {
         <Score handleScore={handleScore} score={vals.score} clicks={vals.clicks} />
         {errs.clicks && <p className="err">{errs.clicks}</p>}
 
-        <div className="form-input">
+        <div className="form__input">
           <input
             type="text"
             name="name"
@@ -25,7 +25,10 @@ export default function Form({ submitForm }) {
           />
           {errs.name && <p className="err">{errs.name}</p>}
         </div>
-        <button className="form-btn" type="Submit">Submit</button>
+        <div className="form__btns">
+          <button className="btn__cta" type="Submit">Submit</button>
+          <button className="btn__cta">Start over</button>
+        </div>
       </form>
   )
 }

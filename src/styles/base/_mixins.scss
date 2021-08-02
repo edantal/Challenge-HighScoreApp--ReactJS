@@ -13,3 +13,22 @@
   background: $solid;
   background: linear-gradient($dir, $color1, $color2);
 }
+
+/* ---- ANIMATION ------------------------------------------------------------ */
+@mixin keyframes($anim) {
+  @-webkit-keyframes #{$anim} {
+    @content;
+  }
+  @-moz-keyframes #{$anim} {
+    @content;
+  }
+  @-ms-keyframes #{$anim} {
+    @content;
+  }
+  @-o-keyframes #{$anim} {
+    @content;
+  }
+  @keyframes #{$anim} {
+    @content;
+  }
+}

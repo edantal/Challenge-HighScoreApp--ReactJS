@@ -1,5 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import './styles/App.scss';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import Form from './components/Form';
 import Success from './components/Success';
 
@@ -24,7 +26,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>High Score App</h1>
+      <Header />
       <div className="container">
         {!isSubmitted ? (
           <Form submitForm={submitForm} />
@@ -33,6 +35,7 @@ function App() {
         )}
 
       </div>
+      <Footer />
     </div>
   );
 }

@@ -6,6 +6,7 @@ export default function useForm(cb, validate) {
     clicks: 0,
     score: 0
   });
+  // const [name, setName] = useState({});
   const [errs, setErrs] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -42,14 +43,24 @@ export default function useForm(cb, validate) {
         body: JSON.stringify(vals)
       };
       fetch('https://httpbin.org/post', req)
-        .then(response => response.json())
-        .then(cb(vals))
-        .then(setVals({
+        .then((response) => {
+          if(response.ok) {
+            return response.json();
+          } else {
+            throw new Error('Something went wrong');
+          }
+        })
+        .then((responseJson) => {
+          cb(vals);
+          setVals({
             name: '',
             clicks: 0,
             score: 0
-          })
-        );
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   }, [errs, isSubmitting, cb, vals]);
 
