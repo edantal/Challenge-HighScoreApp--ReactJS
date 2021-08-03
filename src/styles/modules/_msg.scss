@@ -8,6 +8,10 @@
   color: $clrWhite;
   transition: bottom .4s ease-out;
 
+  &--active {
+    bottom: 0;
+  }
+
   &__box {
     width: 80%;
     margin: 0 auto;

@@ -1,18 +1,17 @@
 import { useState, useEffect } from "react";
 
-export default function useForm(cb, validate) {
+export default function dontuseForm(cb, validate) {
   const [vals, setVals] = useState({
-    name: '',
     clicks: 0,
     score: 0
   });
+  const [name, setName] = useState({});
   const [formErrs, setFormErrs] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = e => {
     const {name, value} = e.target;
-    setVals({
-      ...vals,
+    setName({
       [name]: value
     });
   };
@@ -33,7 +32,6 @@ export default function useForm(cb, validate) {
     setFormErrs({});
     setIsSubmitting(false);
     setVals({
-      name: '',
       clicks: 0,
       score: 0
     });
@@ -41,7 +39,7 @@ export default function useForm(cb, validate) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    setFormErrs(validate(vals));
+    setFormErrs(validate(vals, name));
     setIsSubmitting(true);
   };
 
@@ -50,7 +48,7 @@ export default function useForm(cb, validate) {
       const req = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(vals)
+        body: JSON.stringify({...vals, ...name})
       };
       fetch('https://httpbin.org/post', req)
         .then((response) => {
@@ -68,7 +66,7 @@ export default function useForm(cb, validate) {
           console.log(error);
         });
     }
-  }, [formErrs, isSubmitting, cb, vals]);
+  }, [formErrs, isSubmitting, cb, vals, name]);
 
-  return { handleScore, handleChange, handleSubmit, handleReset, vals, formErrs };
+  return { handleScore, handleChange, handleSubmit, handleReset, vals, name, formErrs };
 }

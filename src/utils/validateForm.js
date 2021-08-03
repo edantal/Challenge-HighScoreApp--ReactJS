@@ -1,11 +1,11 @@
-export default function validateForm(vals) {
+export default function validateForm(vals, input) {
   let errors = {};
 
   if(vals.clicks === 0 && vals.score === 0) {
     errors.clicks = 'Please click the button to get a score';
   }
 
-  if(!vals.name.trim()) {
+  if(!input.name.trim()) {
     errors.name = 'Please Enter your name';
   }
 

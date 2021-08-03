@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function Footer() {
+export default function Footer({ copy }) {
   return (
     <footer>
-      &copy; High score app
+      &copy; {copy}
     </footer>
   )
 }

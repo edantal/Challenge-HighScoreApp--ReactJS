@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default function Header() {
+export default function Header({ title, desc }) {
   return (
     <header className="header">
-      <h1 className="header__title">High Score App</h1>
-      <p className="header__desc">Click the start button to get your score</p>
+      <h1 className="header__title">{title}</h1>
+      <p className="header__desc">{desc}</p>
     </header>
   )
 }
