@@ -12,8 +12,8 @@
     padding: unset;
     background-color: $green;
 
-    &:hover,
-    &:focus {
+    &:not(:disabled):hover,
+    &:not(:disabled):focus {
       background-color: darken($green, 5%);
     }
   }

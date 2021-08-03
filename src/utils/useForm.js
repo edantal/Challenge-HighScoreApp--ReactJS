@@ -6,8 +6,7 @@ export default function useForm(cb, validate) {
     clicks: 0,
     score: 0
   });
-  // const [name, setName] = useState({});
-  const [errs, setErrs] = useState({});
+  const [formErrs, setFormErrs] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = e => {
@@ -29,14 +28,25 @@ export default function useForm(cb, validate) {
     }
   }
 
+  const handleReset = e => {
+    e.preventDefault();
+    setFormErrs({});
+    setIsSubmitting(false);
+    setVals({
+      name: '',
+      clicks: 0,
+      score: 0
+    });
+  }
+
   const handleSubmit = e => {
     e.preventDefault();
-    setErrs(validate(vals));
+    setFormErrs(validate(vals));
     setIsSubmitting(true);
   };
 
   useEffect(() => {
-    if(Object.keys(errs).length === 0 && isSubmitting) {
+    if(Object.keys(formErrs).length === 0 && isSubmitting) {
       const req = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -47,22 +57,18 @@ export default function useForm(cb, validate) {
           if(response.ok) {
             return response.json();
           } else {
-            throw new Error('Something went wrong');
+            throw new Error('Something went wrong.');
           }
         })
         .then((responseJson) => {
-          cb(vals);
-          setVals({
-            name: '',
-            clicks: 0,
-            score: 0
-          });
+          console.log('json', responseJson);
+          cb(responseJson.json);
         })
         .catch((error) => {
           console.log(error);
         });
     }
-  }, [errs, isSubmitting, cb, vals]);
+  }, [formErrs, isSubmitting, cb, vals]);
 
-  return { handleScore, handleChange, handleSubmit, vals, errs };
+  return { handleScore, handleChange, handleSubmit, handleReset, vals, formErrs };
 }

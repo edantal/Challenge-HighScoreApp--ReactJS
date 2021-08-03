@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Form from './components/Form';
 import Success from './components/Success';
+import Message from './components/Message';
 
 function App() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -27,15 +28,17 @@ function App() {
   return (
     <div className="App">
       <Header />
+
       <div className="container">
         {!isSubmitted ? (
           <Form submitForm={submitForm} />
         ) : (
-          <Success vals={vals} />
+          <Success restartApp={submitForm} vals={vals} />
         )}
-
       </div>
+      
       <Footer />
+      <Message />
     </div>
   );
 }

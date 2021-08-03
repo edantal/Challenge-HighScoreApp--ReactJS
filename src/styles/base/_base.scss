@@ -12,6 +12,7 @@ body {
 }
 
 .App {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,14 +20,16 @@ body {
   padding: 1.5rem;
   @include gradient($blue, to right bottom, $blue, $purple);
   text-align: center;
+  overflow: hidden;
 }
 
 .container {
   position: relative;
-  min-width: 40rem;
+  width: 50rem;
   background-color: $clrWhite;
   border-radius: 3px;
   box-shadow: 0 3px 2px 3px rgba($clrBlack,.03);
+  transition: width .5s ease-out;
 
   @include mQuery(SM) {
     width: 90vw;
