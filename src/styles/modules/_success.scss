@@ -7,10 +7,20 @@
     color: $grey3;
     text-transform: uppercase;
   }
+
+  &__stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 2rem;
+    @include mQuery(SM) {
+      flex-direction: column;
+    }
+  }
   
   &__stat {
     padding-bottom: 1rem;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: $grey3;
     text-transform: uppercase;
 

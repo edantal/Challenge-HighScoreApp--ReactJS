@@ -9,44 +9,52 @@ const schema = yup.object().shape({
   name: yup.string().required('Please fill in your name'),
 });
 
-export default function Form({ score, clicks, dispatch }) {
-  const { register, handleSubmit, formState: { errors } } = useForm({
+export default function Form({ score = 0, clicks = 0, dispatch }) {
+  const { register, handleSubmit, formState: { errors }, clearErrors } = useForm({
     resolver: yupResolver(schema),
   });
 
   const onSubmit = (data) => {
-    const req = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({score, clicks, ...data})
-    };
-    fetch('https://httpbin.org/post', req)
-      .then((response) => {
-        if(response.ok) {
-          return response.json();
-        } else {
+    if(clicks === 0) {
+      dispatch({
+        type: ACTIONS.SET_ERROR,
+        payload: 'No clicks detected. Click "Go" to start'
+      })
+    }
+    else {
+      const req = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({score, clicks, ...data})
+      };
+      fetch('https://httpbin.org/post', req)
+        .then((response) => {
+          if(response.ok) {
+            return response.json();
+          } else {
+            dispatch({
+              type: ACTIONS.SET_ERROR,
+              payload: `Server error: Something went wrong.`
+            })
+          }
+        })
+        .then((responseJson) => {
+          dispatch({
+            type: ACTIONS.SET_SUCCESS,
+            payload: responseJson.json
+          });
+        })
+        .catch((error) => {
           dispatch({
             type: ACTIONS.SET_ERROR,
-            payload: `Server error: Something went wrong.`
+            payload: `Server error: ${error.message}`
           })
-        }
-      })
-      .then((responseJson) => {
-        dispatch({
-          type: ACTIONS.SET_SUCCESS,
-          payload: responseJson.json
-        })
-      })
-      .catch((error) => {
-        dispatch({
-          type: ACTIONS.SET_ERROR,
-          payload: `Server error: ${error.message}`
-        })
-      });
+        });
+    }
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="form" noValidate>
+    <form onSubmit={handleSubmit(onSubmit)} className="form">
       {content.inputs.map((input, key) => {
         return (
           <div key={key} className="form__input">
@@ -56,6 +64,13 @@ export default function Form({ score, clicks, dispatch }) {
               className="input"
               placeholder={input.placeholder}
               {...register(input.name)}
+              onChange={(e) => {
+                dispatch({
+                  type: ACTIONS.SET_FIELD,
+                  fieldName: input.name,
+                  payload: e.currentTarget.value,
+                }
+              )}}
             />
             {errors[input.name]?.message && <p className="form__error">{errors[input.name]?.message}</p>}
           </div>
@@ -65,13 +80,15 @@ export default function Form({ score, clicks, dispatch }) {
         <button className="btn__cta" type="Submit">Submit</button>
         <button
           className="btn__cta"
+          type="reset"
           onClick={() => {
+            clearErrors();
             dispatch({
               type: ACTIONS.RESET_SCORE
             })
           }}
         >
-          Start over
+          Reset
         </button>
       </div>
     </form>

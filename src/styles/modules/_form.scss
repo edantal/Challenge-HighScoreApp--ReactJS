@@ -18,6 +18,20 @@
       border: 1px solid $greyE;
       border-radius: 5em;
       outline: none;
+      transition: border .2s ease-out;
+
+      &::placeholder {
+        opacity: 1;
+        transition: opacity .2s ease-out;
+      }
+
+      &:focus {
+        border-color: $blue;
+
+        &::placeholder {
+          opacity: 0;
+        }
+      }
     }
   }
 
@@ -30,10 +44,10 @@
 
   &__btns {
     margin-top: 2.5rem;
-    padding: 1rem;
+    padding: 1rem 3rem 2rem;
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 2fr 1fr;
   }
 
 }

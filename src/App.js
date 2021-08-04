@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useEffect } from 'react';
+import React, { useReducer } from 'react';
 import './styles/App.scss';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -9,61 +9,73 @@ import Success from './components/Success';
 import Message from './components/Message';
 
 export const ACTIONS = {
-  SET_SCORE: 'set-score',
-  RESET_SCORE: 'reset',
-  SET_ERROR: 'set-error',
-  SET_SUCCESS: 'set-success',
+  SET_SCORE:    'set-score',
+  RESET_SCORE:  'reset-score',
+  SET_FIELD:    'set-field',
+  SET_ERROR:    'set-error',
+  SET_SUCCESS:  'set-success',
+  RESET_ALL:    'reset-all'
 }
 
 function App() {
-  const [form_result, dispatchForm] = useReducer(formReducer, {
+  const initialState = {
+    score: 0,
+    clicks: 0,
+    name: '',
     msg: '',
     show_msg: false,
     success: false,
-    json: {}
-  });
-  const [score, dispatchScore] = useReducer(scoreReducer, 0);
-  const [clicks, setClicks] = useState(0);
+    result: {}
+  };
+  const [state, dispatch] = useReducer(appReducer, initialState);
+  const { score, clicks, name, msg, show_msg, success, result } = state;
 
   function setScore() {
     const new_score = Math.floor(Math.random() * 200) - 100;
-    if(new_score !== 0) {
-      return new_score;
-    }
-    setScore();
+    return (new_score === 0) ? setScore() : new_score;
   }
 
-  useEffect(() => {
-    setClicks(prevClicks => prevClicks + 1);
-  }, [score]);
-  
-  function scoreReducer(score, action) {
-    switch(action.type) {
-      case ACTIONS.SET_SCORE:
-        return setScore();
-      case ACTIONS.RESET_SCORE:
-        return 0;
-      default:
-        return score;
-    }
-  }
-
-  function formReducer(form_result, action) {
-    switch(action.type) {
-      case ACTIONS.SET_ERROR:
+  function appReducer(state, action) {
+    switch (action.type) {
+      case ACTIONS.SET_SCORE: {
+        return {
+          score: setScore(),
+          clicks: action.payload
+        };
+      }
+      case ACTIONS.RESET_SCORE: {
+        return {
+          score: 0,
+          clicks: 0,
+          name: ''
+        };
+      }
+      case ACTIONS.SET_FIELD: {
+        return {
+          ...state,
+          name: action.payload
+        };
+      }
+      case ACTIONS.SET_ERROR: {
         return {
           msg: action.payload,
           show_msg: true
         };
-      case ACTIONS.SET_SUCCESS:
+      }
+      case ACTIONS.SET_SUCCESS: {
         return {
-          msg: '',
-          show_msg: false,
+          name: action.payload.name,
+          msg: 'Your score was submitted successfully!',
+          show_msg: true,
           success: true,
-          json: action.payload
+          result: action.payload
         };
+      }
+      case ACTIONS.RESET_ALL: {
+        return initialState;
+      }
       default:
-        return form_result;
+        return state;
     }
   }
 
@@ -73,20 +85,20 @@ function App() {
 
       <div className="container">
 
-        {!form_result.success ? (
+        {!success ? (
           <>
             <MetaBar score={score} clicks={clicks} />
-            <ScoreBtn score={score} clicks={clicks} dispatch={dispatchScore} />
-            <Form score={score} clicks={clicks} dispatch={dispatchForm} />
+            <ScoreBtn score={score} clicks={clicks} dispatch={dispatch} />
+            <Form score={score} clicks={clicks} name={name} dispatch={dispatch} />
           </>
         ) : (
-          <Success results={form_result.json} />
+          <Success result={result} dispatch={dispatch} />
         )}
 
       </div>
 
       <Footer copy="High Score App" />
-      <Message show_msg={form_result.show_msg} msg={form_result.msg} />
+      <Message show_msg={show_msg} msg={msg} success={success} />
     </div>
   );
 }

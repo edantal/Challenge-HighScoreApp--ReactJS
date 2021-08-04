@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function MetaBar({ score, clicks }) {
+export default function MetaBar({ score = 0, clicks = 0 }) {
   return (
     <aside className="score__meta">
       <div className="score__meta-stat">

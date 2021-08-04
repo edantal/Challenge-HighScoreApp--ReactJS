@@ -4,7 +4,7 @@ const content = {
       type: 'text',
       label: 'Name',
       name: 'name',
-      placeholder: 'Enter your name'
+      placeholder: 'Enter your name',
     },
   ]
 };
