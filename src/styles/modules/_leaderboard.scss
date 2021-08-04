@@ -1,0 +1,107 @@
+.leaderboard {
+  opacity: 0;
+  visibility: hidden;
+  width: 300px;
+  height: auto;
+  border-radius: 4px;
+  @include gradient($greyAcc2, to bottom, $greyAcc1, $greyAcc2);
+  box-shadow: 0 5px 15px rgba($clrBlack, .35);
+  position: absolute;
+  top: 1rem;
+  left: -10rem;
+  transition: all .3s ease-out;
+  z-index: 1;
+  overflow: hidden;
+
+  &--active {
+    opacity: 1;
+    visibility: visible;
+    left: 1rem;
+  }
+
+  &__head {
+    padding: 2rem 1.6rem;
+    font-size: 2rem;
+    text-align: center;
+    color: $clrWhite;
+
+    & h2 {
+      display: inline-block;
+      margin-left: 1rem;
+    }
+  }
+
+  &__body {
+    font-size: 1.6rem;
+  }
+
+  &__list {
+    counter-reset: number;
+  }
+
+  &__item {
+    display: flex;
+    padding: 1.6rem;
+    background-color: $greyE;
+    text-align: left;
+    color: $clrBlack;
+
+    &::before {
+      content: counter(number) ".";
+      counter-increment: number;
+      margin-right: 1rem;
+    }
+
+    & mark {
+      flex-grow: 1;
+      background-color: transparent;
+    }
+
+    & small {
+      & span {
+        margin-left: .5rem;
+        padding: .3rem 1rem;
+        background-color: $purple;
+        border-radius: 5rem;
+        font-size: .7em;
+        color: $clrWhite;
+      }
+    }
+
+    &:nth-child(1) {
+      background-color: $green;
+      color: $clrWhite;
+    }
+
+    &:not(:first-child),
+    &:not(:last-child) {
+      border-bottom: 1px solid $greyC;
+    }
+  }
+
+  &__btn {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    width: 2.5em;
+    height: 2.5em;
+    background-color: $clrWhite;
+    border-radius: 50%;
+    font-size: 1.8rem;
+    color: $green;
+    transition: all .3s ease-out;
+    z-index: 2;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      transform: scale(1.2);
+      color: $purple;
+    }
+
+    &--close {
+      font-size: 1rem;
+      color: $red;
+    }
+  }
+}

@@ -5,6 +5,7 @@ export default function ScoreBtn({ score = 0, clicks = 0, dispatch }) {
   return (
     <button
       className="btn score__btn btn--pulse"
+      aria-label="Get score"
       onClick={() => {
         dispatch({
           type: ACTIONS.SET_SCORE,
