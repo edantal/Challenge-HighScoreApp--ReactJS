@@ -27,7 +27,7 @@ export default function Form({ score = 0, clicks = 0, dispatch }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({score, clicks, ...data})
       };
-      fetch('https://httpbin.org/post', req)
+      fetch('http://localhost:3006/leaderboard', req)
         .then((response) => {
           if(response.ok) {
             return response.json();
@@ -41,7 +41,7 @@ export default function Form({ score = 0, clicks = 0, dispatch }) {
         .then((responseJson) => {
           dispatch({
             type: ACTIONS.SET_SUCCESS,
-            payload: responseJson.json
+            payload: responseJson
           });
         })
         .catch((error) => {

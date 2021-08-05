@@ -1,3 +1,14 @@
+## Run app with json-server
+
+> Run json-server on terminal (api runs on port 3006)
+```
+npm run server
+```
+> After server is running open new terminal and run react app
+```
+npm start
+```
+
 # Create a React component called HighScoreApp
 
 1. a button, which adjusts the users score by a number between -100 and 100 when clicked

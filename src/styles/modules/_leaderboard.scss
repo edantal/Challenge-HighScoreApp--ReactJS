@@ -1,7 +1,7 @@
 .leaderboard {
   opacity: 0;
   visibility: hidden;
-  width: 300px;
+  width: 400px;
   height: auto;
   border-radius: 4px;
   @include gradient($greyAcc2, to bottom, $greyAcc1, $greyAcc2);
@@ -12,12 +12,25 @@
   transition: all .3s ease-out;
   z-index: 1;
   overflow: hidden;
+  @include mQuery(MD) {
+    width: 60vw;
+  }
+  @include mQuery(SM) {
+    width: 80vw;
+  }
 
   &--active {
     opacity: 1;
     visibility: visible;
     left: 1rem;
+    @include mQuery(MD) {
+      left: 20vw;
+    }
+    @include mQuery(SM) {
+      left: 10vw;
+    }
   }
+  
 
   &__head {
     padding: 2rem 1.6rem;

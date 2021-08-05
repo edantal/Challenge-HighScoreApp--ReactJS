@@ -8,7 +8,6 @@ import Form from './components/Form';
 import Success from './components/Success';
 import Message from './components/Message';
 import Leaderboard from './components/Leaderboard';
-import Data from './static/data.json';
 
 export const ACTIONS = {
   SET_SCORE: 'set-score',
@@ -34,13 +33,27 @@ function App() {
   const [state, dispatch] = useReducer(appReducer, initialState);
   const { score, clicks, name, msg, showMsg, showLeaderboard, success, result } = state;
 
+  async function fetchLeaderboard() {
+    try {
+      const response = await fetch("http://localhost:3006/leaderboard");
+      const leaderboard = await response.json();
+      return leaderboard;
+    }
+    catch(e) {
+      dispatch({
+        type: ACTIONS.SET_ERROR,
+        payload: `Fetch leaderboard error: ${e}`
+      })
+    }
+    return null;
+  }
+
   function setScore() {
     const new_score = Math.floor(Math.random() * 200) - 100;
     return (new_score === 0) ? setScore() : new_score;
   }
 
   function appReducer(state, action) {
-    console.log(state);
     switch (action.type) {
       case ACTIONS.SET_SCORE: {
         return {
@@ -63,6 +76,7 @@ function App() {
       }
       case ACTIONS.TOGGLE_LEADERBOARD: {
         return {
+          ...state,
           showLeaderboard: action.payload
         };
       }
@@ -110,7 +124,7 @@ function App() {
       <Footer copy="High Score App" />
       <Message showMsg={showMsg} msg={msg} success={success} />
 
-      <Leaderboard showLeaderboard={showLeaderboard} data={Data} dispatch={dispatch} />
+      <Leaderboard showLeaderboard={showLeaderboard} onFetchLeaderboard={fetchLeaderboard} dispatch={dispatch} />
     </div>
   );
 }
