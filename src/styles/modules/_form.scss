@@ -1,0 +1,53 @@
+.form {
+  overflow: hidden;
+
+  &__input {
+    margin: 0 0 1.6rem;
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="tel"] {
+      font-family: inherit;
+      font-size: 1.6rem;
+      line-height: 1.2;
+      color: inherit;
+    
+      padding: .8em;
+      background-color: $greyE;
+      border: 1px solid $greyE;
+      border-radius: 5em;
+      outline: none;
+      transition: border .2s ease-out;
+
+      &::placeholder {
+        opacity: 1;
+        transition: opacity .2s ease-out;
+      }
+
+      &:focus {
+        border-color: $blue;
+
+        &::placeholder {
+          opacity: 0;
+        }
+      }
+    }
+  }
+
+  &__error {
+    display: block;
+    margin-top: .5rem;
+    font-size: 1.2rem;
+    color: $red;
+  }
+
+  &__btns {
+    margin-top: 2.5rem;
+    padding: 1rem 3rem 2rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 2fr 1fr;
+  }
+
+}

@@ -1,0 +1,28 @@
+{
+  "leaderboard": [
+    {
+      "score": 27,
+      "clicks": 3,
+      "name": "test",
+      "id": 1
+    },
+    {
+      "score": 93,
+      "clicks": 3,
+      "name": "test2",
+      "id": 2
+    },
+    {
+      "score": 37,
+      "clicks": 1,
+      "name": "test3",
+      "id": 3
+    },
+    {
+      "score": -24,
+      "clicks": 1,
+      "name": "test4",
+      "id": 4
+    }
+  ]
+}

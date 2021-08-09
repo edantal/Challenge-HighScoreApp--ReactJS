@@ -1,0 +1,37 @@
+.msg {
+  position: absolute;
+  bottom: -5rem;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  background-color: $red;
+  color: $clrWhite;
+  transition: bottom .4s ease-out;
+
+  &--active {
+    bottom: 0;
+  }
+
+  &--success {
+    background-color: $green;
+  }
+
+  &--error {
+    background-color: $red;
+  }
+
+  &__box {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  &__text {
+    font-size: 1.3rem;
+    line-height: 1;
+
+    & svg {
+      margin-right: .5rem;
+      font-size: 1.3em;
+    }
+  }
+}

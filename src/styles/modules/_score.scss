@@ -1,0 +1,43 @@
+.score {
+  &__btn {
+    font-size: 1.6rem;
+    font-family: inherit;
+    font-weight: 300;
+    color: $clrWhite;
+    text-align: center;
+
+    width: 6em;
+    height: 6em;
+    margin: 2.5rem auto;
+    padding: 1rem;
+    background-color: $green;
+
+    &:not(:disabled):hover,
+    &:not(:disabled):focus {
+      background-color: darken($green, 5%);
+    }
+  }
+
+  &__meta {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    width: 100%;
+    border-bottom: 1px solid $greyE;
+
+    font-size: 1.7rem;
+    text-align: left;
+
+    @include mQuery(SM) {
+      font-size: 1.3rem;
+    }
+
+    &-stat {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      color: $grey3;
+    }
+  }
+}

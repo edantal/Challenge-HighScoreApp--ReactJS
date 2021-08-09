@@ -1,0 +1,20 @@
+// move animation
+@include keyframes(bg-gradient) {
+  0% { background-position: left; }
+  100% { background-position: right; }
+}
+
+// pulse animation
+@include keyframes(pulse) {
+  0% {
+    transform: scale(.98);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 50px rgba($green, 0);
+  }
+  100% {
+    transform: scale(.98);
+    box-shadow: 0 0 0 0 rgba($green, 0);
+  }
+}

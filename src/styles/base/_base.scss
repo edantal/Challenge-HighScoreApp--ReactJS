@@ -1,0 +1,38 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.App {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  padding: 1.5rem;
+  @include gradient($blue, to right bottom, $blue, $purple);
+  text-align: center;
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  width: 50rem;
+  background-color: $clrWhite;
+  border-radius: 3px;
+  box-shadow: 0 3px 2px 3px rgba($clrBlack,.03);
+  transition: width .5s ease-out;
+
+  @include mQuery(SM) {
+    width: 90vw;
+    min-width: unset;
+  }
+}
