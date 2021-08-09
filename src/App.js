@@ -19,6 +19,8 @@ export const ACTIONS = {
   TOGGLE_LEADERBOARD: 'toggle-leaderboard'
 }
 
+const CACHE = {};
+
 function App() {
   const initialState = {
     score: 0,
@@ -34,8 +36,10 @@ function App() {
   const { score, clicks, name, msg, showMsg, showLeaderboard, success, result } = state;
 
   async function fetchLeaderboard() {
+    const url = "http://localhost:3006/leaderboard";
+
     try {
-      const response = await fetch("http://localhost:3006/leaderboard");
+      const response = await fetch(url);
       const leaderboard = await response.json();
       return leaderboard;
     }

@@ -8,7 +8,8 @@
   box-shadow: 0 5px 15px rgba($clrBlack, .35);
   position: absolute;
   top: 1rem;
-  left: -10rem;
+  left: 50%;
+  transform: translate(-50%, calc(-100% - 2rem));
   transition: all .3s ease-out;
   z-index: 1;
   overflow: hidden;
@@ -22,13 +23,7 @@
   &--active {
     opacity: 1;
     visibility: visible;
-    left: 1rem;
-    @include mQuery(MD) {
-      left: 20vw;
-    }
-    @include mQuery(SM) {
-      left: 10vw;
-    }
+    transform: translate(-50%, 1rem);
   }
   
 
